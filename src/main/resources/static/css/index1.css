@@ -7,7 +7,7 @@ and open the template in the editor.
     Created on : May 3, 2022, 3:14:43 PM
     Author     : HP
 */
-body#principal{
+#principal{
     background-image: url("/img/bookstore-buenosaires-argentina.jpg");
     background-size: cover;
     background-repeat: no-repeat;

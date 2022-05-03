@@ -29,13 +29,14 @@ public class AutorControlador {
     }
 
     @PostMapping("/registroAutor")
-    public String registroAutor(ModelMap modelo, @RequestParam(required = false) String nombre) {
+    public String registroAutor(ModelMap modelo, @RequestParam(required = false) String nombre, RedirectAttributes redirectAttrs) {
         try {
             autorServicio.registrar(nombre);
-        } catch (ExcepcionServicio ex) {
+            redirectAttrs.addFlashAttribute("mensaje", "Autor agregado correctamente");
+        } catch (ExcepcionServicio ex){
             modelo.put("error", ex.getMessage());
             Logger.getLogger(PortalControlador.class.getName()).log(Level.SEVERE, null, ex);
-            return "autorForm.html";
+            return "AutorForm.html";
         }
         modelo.put("mensaje", "Autor cargado con éxito");
         return "index.html";

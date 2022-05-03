@@ -1,8 +1,7 @@
 <div th:fragment="registro">
-    <form action="/registroEditorial" method="post">
+    <form th:action="@{/registroEditorial}" method="post">
         <H1>Registro de Editorial</H1>
         <p th:if="${error != null}" th:text="${error}" style="color: red"> </p>
-
         <div class="form-group">
             <label for="exampleFormControlInput1">Nombre del Editorial</label>
             <input type="text" class="form-control" name="nombreEditorial" placeholder="Alfaguara">

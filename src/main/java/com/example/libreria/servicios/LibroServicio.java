@@ -89,7 +89,7 @@ public class LibroServicio {
         if (titulo.isEmpty()) {
             throw new ExcepcionServicio("El titulo no puede estar vacio");
         }
-        if (anio == null || anio < 1900 && anio > 2200) {
+        if (anio == null) {
             throw new ExcepcionServicio("Ingrese un año valido");
         }
         if (isbn == null) {

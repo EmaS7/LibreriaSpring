@@ -58,10 +58,10 @@ public class LibroControlador {
         modelo.put("mensaje", "Libro cargado con exito!");
         return "index.html";
     }
-    @GetMapping("/tablasLibros")
+    @GetMapping("/tablasLibro")
     public String listadoLibros(ModelMap modelo){
         modelo.addAttribute("lista", libroServicio.listadoLibros());
-        return "tablasLibros.html";
+        return "tablasLibro.html";
     }    
     @GetMapping("/libro/{id}")
     public String editarLibro(@PathVariable("id") String id,RedirectAttributes redirectAttributes, ModelMap modelo){

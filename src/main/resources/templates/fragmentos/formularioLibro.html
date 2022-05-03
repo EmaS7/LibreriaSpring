@@ -6,7 +6,7 @@
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <form action="/registroLibro" method="post">
+    <form th:action="@{/registroLibro}" method="post">
         <div th:if="${error != 'Debe cargar el nombre de la editorial'} and ${error != 'Debe cargar el nombre del autor'}">
             <div class="form-group">
                 <label for="isbn">ISBN</label>
@@ -27,8 +27,6 @@
                 <br>
                 <label for="editorial">Editorial del libro</label><br>
                 <select name="editorial">
-                        <!-- th:each="autor(variable auxiliar):${autores} (listado que exportamos del controlador)" 
-                        th:text="${autor.nombre} (al poner el punto, entramos al atributo del objeto del listado)-->
                         <option th:if="${editoriales!=null}"
                                 th:each="editorial:${editoriales}"
                                 th:text="${editorial.nombre}"/>
@@ -64,27 +62,36 @@
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <form action="/editarLibro" method="post">
+    <form th:action="@{/editarLibro}" method="post">
         <div th:if="${error != 'Debe cargar el nombre de la editorial'} and ${error != 'Debe cargar el nombre del autor'}">
             <div class="form-group">
                 <input type="hidden" class="form-control" name="id" th:value="${id}">
+                
                 <label for="isbn">ISBN</label>
+                
                 <input type="number" class="form-control" name="isbn" th:value="${isbn}">
+                
                 <label for="titulo">Título</label>
-                <input type="text" class="form-control" name="titulo" th:value="${titulo}">
+                
+                <input type="text" class="form-control"  name="titulo" th:value="${titulo}">
+                
                 <label for="anio">Año del libro</label>
+                
                 <input type="number" class="form-control" name="anio" th:value="${anio}">
+                
                 <label for="autor">Autor del libro</label><br>
-                <select name="autor">
+                
+                <select name="autor" class="form-group"  th:text="${autor.nombre}" th:value="${autor.id}" th:selected="${tipo.autor != null && autor == tipo.autor}">
+                    
                     <!-- th:each="autor(variable auxiliar):${autores} (listado que exportamos del controlador)" 
                     th:text="${autor.nombre} (al poner el punto, entramos al atributo del objeto del listado)-->
                     <option th:each="autor:${autores}"
-                            th:text="${autor.nombre}"/>
+                            th:text="${autor.nombre}" th:value="${editorial.id}" th:selected="${tipo.editorial != null && editorial == tipo.editorial}"/>
                     <option>Otro autor</option>
                 </select>
                 <br>
                 <label for="editorial">Editorial del libro</label><br>
-                <select name="editorial">
+                <select name="editorial" class="form-group">
                     <!-- th:each="autor(variable auxiliar):${autores} (listado que exportamos del controlador)" 
                     th:text="${autor.nombre} (al poner el punto, entramos al atributo del objeto del listado)-->
                     <option th:each="editorial:${editoriales}"
