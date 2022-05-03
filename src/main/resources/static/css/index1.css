@@ -1,0 +1,20 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : May 3, 2022, 3:14:43 PM
+    Author     : HP
+*/
+body#principal{
+    background-image: url("/img/bookstore-buenosaires-argentina.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: inherit;
+}
+
+nav.navbar {
+    background-color: white;
+    color: blue;
+}
