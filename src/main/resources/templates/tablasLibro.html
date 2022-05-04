@@ -11,7 +11,7 @@
     </head>
 
     <body>
-        <div th:replace="LibroForm :: navbar"></div>
+        <div th:replace="libroForm :: navbar"></div>
         <table class="table" id="librosListados">
             <thead>
                 <tr>
@@ -27,10 +27,9 @@
                     <td th:text="${listadoAux.titulo}"></td>
                     <td th:text="${listadoAux.anio}"></td>
                     <td th:text="${listadoAux.ejemplares}"></td>
-                    <td><a class="btn btn-warning" th:href="@{/libro/{id} (id=${listadoAux.id})}">Editar</a></td>
+                    <td><a class="btn btn-warning" th:href="@{libro/{id} (id=${listadoAux.id})}">Editar</a></td>
                     <td th:if="${listadoAux.alta==false}"><a class="btn btn-success" th:href="@{libro/alta/{id} (id=${listadoAux.id})}">Alta</a></td>
                     <td th:unless="${listadoAux.alta==false}"><a class="btn btn-danger" th:href="@{libro/baja/{id} (id=${listadoAux.id})}">Baja</a></td>
-
                 </tr>
             </tbody>
         </table>

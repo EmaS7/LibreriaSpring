@@ -27,8 +27,8 @@ public class LibroServicio {
     private LibroRepositorio libroRepositorio;
 
     @Transactional
-    public void registrar(String titulo, Integer anio, Long isbn, Integer ejemp, Integer ejempPrest, Integer ejempRest, Autor autor, Editorial editorial) throws ExcepcionServicio {
-        validar(titulo, anio, isbn, ejemp, ejempPrest, ejempRest);
+    public void registrar(String titulo, Integer anio, Long isbn, Integer ejemp, Autor autor, Editorial editorial) throws ExcepcionServicio {
+        validar(titulo, anio, isbn, ejemp, autor, editorial);
         Libro libro = new Libro();
         libro.setIsbn(isbn);
         libro.setTitulo(titulo);
@@ -36,13 +36,16 @@ public class LibroServicio {
         libro.setAutor(autor);
         libro.setEditorial(editorial);
         libro.setEjemplares(ejemp);
+        libro.setAlta(Boolean.TRUE);
+        libro.setEjemplaresPrestados(0);
+        libro.setEjemplaresRestantes(ejemp);
 
         libroRepositorio.save(libro);
     }
 
     @Transactional
-    public void modificar(String id, String titulo, Integer anio, Long isbn, Integer ejemp, Integer ejempPrest, Integer ejempRest, Autor autor, Editorial editorial) throws ExcepcionServicio {
-        validar(titulo, anio, isbn, ejemp, ejempPrest, ejempRest);
+    public void modificar(String id, String titulo, Integer anio, Long isbn, Integer ejemp, Autor autor, Editorial editorial) throws ExcepcionServicio {
+        validar(titulo, anio, isbn, ejemp, autor, editorial);
         Optional<Libro> respuesta = libroRepositorio.findById(id);
         if (respuesta.isPresent()) {
             Libro libro = respuesta.get();
@@ -52,6 +55,8 @@ public class LibroServicio {
             libro.setAutor(autor);
             libro.setEditorial(editorial);
             libro.setEjemplares(ejemp);
+            libro.setEjemplaresPrestados(0);
+            libro.setEjemplaresRestantes(ejemp);
 
             libroRepositorio.save(libro);
         } else {
@@ -82,7 +87,7 @@ public class LibroServicio {
         }
     }
 
-    public void validar(String titulo, Integer anio, Long isbn, Integer ejemp, Integer ejempPrest, Integer ejempRest) throws ExcepcionServicio {
+    public void validar(String titulo, Integer anio, Long isbn, Integer ejemp, Autor autor, Editorial editorial) throws ExcepcionServicio {
         if (titulo == null) {
             throw new ExcepcionServicio("El titulo no puede ser nulo");
         }
@@ -95,16 +100,15 @@ public class LibroServicio {
         if (isbn == null) {
             throw new ExcepcionServicio("Ingrese un año valido");
         }
+        if (autor == null) {
+            throw new ExcepcionServicio("Debe cargar un autor");
+        }
+        if (editorial == null) {
+            throw new ExcepcionServicio("Debe cargar una editorial");
+        }
         if (ejemp == null) {
             throw new ExcepcionServicio("Cantidad de ejemplares no valido");
         }
-        if (ejempPrest == null) {
-            throw new ExcepcionServicio("Error");
-        }
-        if (ejempRest == null) {
-            throw new ExcepcionServicio("Error");
-        }
-
     }
 
     public List<Libro> listadoLibros() {

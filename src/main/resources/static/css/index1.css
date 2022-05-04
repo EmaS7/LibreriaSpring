@@ -9,12 +9,12 @@ and open the template in the editor.
 */
 #principal{
     background-image: url("/img/bookstore-buenosaires-argentina.jpg");
-    background-size: cover;
+    background-size:cover;
     background-repeat: no-repeat;
     background-position: inherit;
 }
 
 nav.navbar {
-    background-color: white;
-    color: blue;
+    background-color: #fec89a;
+    color: #fec89a;
 }

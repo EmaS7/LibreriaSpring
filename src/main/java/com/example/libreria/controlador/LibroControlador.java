@@ -45,7 +45,7 @@ public class LibroControlador {
         Autor autorObjeto = autorServicio.buscarPorNombre(autor);
         Editorial editorialObjeto = editorialServicio.buscarPorNombre(editorial);
         try{
-            libroServicio.registrar(titulo, anio, isbn, ejemplares, ejempPrest, ejempRest, autorObjeto, editorialObjeto);
+            libroServicio.registrar(titulo, anio, isbn, ejemplares, autorObjeto, editorialObjeto);
         }catch(ExcepcionServicio ex){
             modelo.put("error", ex.getMessage());
             modelo.put("isbn", isbn);
@@ -58,11 +58,13 @@ public class LibroControlador {
         modelo.put("mensaje", "Libro cargado con exito!");
         return "index.html";
     }
+    
     @GetMapping("/tablasLibro")
     public String listadoLibros(ModelMap modelo){
         modelo.addAttribute("lista", libroServicio.listadoLibros());
         return "tablasLibro.html";
     }    
+    
     @GetMapping("/libro/{id}")
     public String editarLibro(@PathVariable("id") String id,RedirectAttributes redirectAttributes, ModelMap modelo){
         Libro libro = libroServicio.buscarLibros(id).get();
@@ -74,13 +76,14 @@ public class LibroControlador {
         modelo.put("editoriales", editorialServicio.listadoEditorial());
         return "libroForm.html";
     }
+    
     @PostMapping("/editarLibro")
-    public String CambioLibro(RedirectAttributes redirectAttributes, String id, ModelMap modelo, @RequestParam(required = false) Long isbn, @RequestParam(required = false) String titulo, @RequestParam(required = false) Integer anio, @RequestParam(required = false) Integer ejemplares, @RequestParam(required = false) Integer ejempPrest, @RequestParam(required = false) Integer ejempRest, @RequestParam(required = false) String autor, @RequestParam(required = false) String editorial){
+    public String CambioLibro(RedirectAttributes redirectAttributes, String id, ModelMap modelo, @RequestParam(required = false) Long isbn, @RequestParam(required = false) String titulo, @RequestParam(required = false) Integer anio, @RequestParam(required = false) Integer ejemplares, @RequestParam(required = false) String autor, @RequestParam(required = false) String editorial){
         Libro libro = libroServicio.buscarLibros(id).get();
         Autor autorObjeto = autorServicio.buscarPorNombre(autor);
         Editorial editorialObjeto = editorialServicio.buscarPorNombre(editorial);
         try{
-            libroServicio.modificar(id, titulo, anio, isbn, ejemplares, ejempPrest, ejempRest, autorObjeto, editorialObjeto);
+            libroServicio.modificar(id, titulo, anio, isbn, ejemplares, autorObjeto, editorialObjeto);
         }catch(ExcepcionServicio ex){
             modelo.put("tipo", libro);
             redirectAttributes.addAttribute("id", id);
@@ -99,7 +102,7 @@ public class LibroControlador {
             modelo.put("error", ex.getMessage());
             return "tablasAutor";
         }
-        return "redirect:/tablasLibros";
+        return "redirect:/tablasLibro";
     }
     
     @GetMapping("libro/alta/{id}")
@@ -110,7 +113,7 @@ public class LibroControlador {
             modelo.put("error", ex.getMessage());
             return "tablasAutor";
         }
-        return "redirect:/tablasLibros";
+        return "redirect:/tablasLibro";
     }
     
 }

@@ -10,23 +10,21 @@
         <div th:if="${error != 'Debe cargar el nombre de la editorial'} and ${error != 'Debe cargar el nombre del autor'}">
             <div class="form-group">
                 <label for="isbn">ISBN</label>
-                <input type="number" class="form-control" name="isbn" placeholder="9788420437484" th:value="${isbn}">
+                <input type="number" class="form-control" name="isbn" placeholder="9788420" th:value="${isbn}">
                 <label for="titulo">Título</label>
                 <input type="text" class="form-control" name="titulo" placeholder="Rayuela" th:value="${titulo}">
                 <label for="anio">Año del libro</label>
                 <input type="number" class="form-control" name="anio" placeholder="2019" th:value="${anio}">
                 <label for="autor">Autor del libro</label><br>
-                <select name="autor">
-                    <!-- th:each="autor(variable auxiliar):${autores} (listado que exportamos del controlador)" 
-                    th:text="${autor.nombre} (al poner el punto, entramos al atributo del objeto del listado)-->
-                    <option  th:if="${autores != null}"
+                <select class="form-control" name="autor">
+                    <option  th:if="${autores != null}"9
                              th:each="autor:${autores}"
                              th:text="${autor.nombre}"/>
                     <option>Otro autor</option>
                 </select>
                 <br>
                 <label for="editorial">Editorial del libro</label><br>
-                <select name="editorial">
+                <select class="form-control" name="editorial">
                         <option th:if="${editoriales!=null}"
                                 th:each="editorial:${editoriales}"
                                 th:text="${editorial.nombre}"/>
@@ -42,6 +40,7 @@
                     <option>4</option>
                     <option>5</option>
                 </select>
+            </div>
             </div>
             <button type="submit" class="btn btn-primary" >Cargar Libro</button>    
         </div>

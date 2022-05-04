@@ -11,7 +11,7 @@
 </div>
 <div th:fragment="edicion">
     <H1>Edición de Autor</H1>
-    <form action="/edicionAutor" method="post">
+    <form th:action="@{/edicionAutor}" method="post">
         <p th:if="${error != null}" th:text="${error}" style="color: red"> </p>
         <div class="form-group">
             <input type="hidden" class="form-control" name="id" th:value="${id}">
