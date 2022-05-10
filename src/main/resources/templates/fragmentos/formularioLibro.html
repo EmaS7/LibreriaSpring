@@ -80,12 +80,12 @@
                 
                 <label for="autor">Autor del libro</label><br>
                 
-                <select name="autor" class="form-group"  th:text="${autor.nombre}" th:value="${autor.id}" th:selected="${tipo.autor != null && autor == tipo.autor}">
+                <select name="autor" class="form-group" th:selected="${tipo.autor != null && autor == tipo.autor}">
                     
                     <!-- th:each="autor(variable auxiliar):${autores} (listado que exportamos del controlador)" 
                     th:text="${autor.nombre} (al poner el punto, entramos al atributo del objeto del listado)-->
                     <option th:each="autor:${autores}"
-                            th:text="${autor.nombre}" th:value="${editorial.id}" th:selected="${tipo.editorial != null && editorial == tipo.editorial}"/>
+                            th:text="${autor.nombre}" th:value="${autor.id}" th:selected="${tipo.autor != null && autor == tipo.autor}"/>
                     <option>Otro autor</option>
                 </select>
                 <br>
